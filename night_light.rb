@@ -29,9 +29,8 @@ end
 
 class MotionSensor
   def self.on
-    puts 'motion detection status: on'
-    # do motion detecting stuff here
-      # self.motion_detected
+    motion = GPIO::MotionDetector.new(pin: 18)
+    self.motion_detected if motion.detect
   end
 
 
