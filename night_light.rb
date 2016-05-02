@@ -18,7 +18,7 @@ class NightLight
   }
 
   def self.toggle(state=:on)
-    return false unless self.is_operating_hours? || state == :off
+    return false unless self.is_operating_hours?
     self.hue_client.lights.each do |light|
       next unless self.is_nightlight? light
       case state
