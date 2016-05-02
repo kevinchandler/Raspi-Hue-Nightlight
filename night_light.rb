@@ -1,9 +1,9 @@
-require 'gpio' # https://github.com/klappy/gpio
-require 'hue' # https://github.com/soffes/hue
+require 'gpio'
+require 'hue'
 
 class NightLight
   OPERATING_HOURS = (0..5).to_a.unshift(23) # 11pm-6am
-  NIGHT_LIGHTS = (1..6).to_a  # light numbers to turn on
+  NIGHT_LIGHTS = [3,2,1,5,6] # light numbers to turn on
   DEFAULT_SETTINGS = {
     brightness: 144,
     color_temperature: 467,
@@ -58,7 +58,9 @@ class MotionSensor
 
   def on
     motion = GPIO::MotionDetector.new(pin: 18)
-    motion_detected if motion.detect && !@sleeping
+    loop do
+      motion_detected if motion.detect && !@sleeping
+    end
   end
 
   def motion_detected
