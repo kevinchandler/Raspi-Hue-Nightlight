@@ -1,6 +1,12 @@
 require 'gpio'
 require 'hue'
 
+begin
+  `echo "24" > /sys/class/gpio/export`
+rescue => e
+  abort e
+end
+
 class NightLight
   OPERATING_HOURS = (0..5).to_a.unshift(23) # 11pm-6am
   NIGHT_LIGHTS = [3,2,1,5,6] # light numbers to turn on
