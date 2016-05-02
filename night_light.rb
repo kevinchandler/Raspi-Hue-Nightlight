@@ -39,7 +39,7 @@ class NightLight
   end
 
   def self.is_operating_hours?
-    OPERATING_HOURS.include? Time.now.hour
+    OPERATING_HOURS.include? Time.now.hour - 7
   end
 
   def self.hue_client
