@@ -4,6 +4,12 @@ require 'hue' # https://github.com/soffes/hue
 class NightLight
   OPERATING_HOURS = (0..5).to_a.unshift(23) # 11pm-6am
   NIGHT_LIGHTS = (1..6).to_a  # light numbers to turn on
+  DEFAULT_SETTINGS = {
+    brightness: 144,
+    color_temperature: 467,
+    hue: 13088,
+    saturation: 213,
+  }
 
   def self.toggle(state=:on)
     return false unless self.is_operating_hours? || state == :off
@@ -11,10 +17,20 @@ class NightLight
       next unless self.is_nightlight? light
       case state
       when :on
+        light.brightness = 25
+        light.color_temperature = 500
+        light.hue = 13236
+        light.saturation = 226
         light.on!
       when :off
         light.off!
+        light.brightness = DEFAULT_SETTINGS[:brightness]
+        light.color_temperature = DEFAULT_SETTINGS[:color_temperature]
+        light.hue = DEFAULT_SETTINGS[:hue]
+        light.saturation = DEFAULT_SETTINGS[:saturation]
       end
+
+      sleep 0.4
     end
   end
 
