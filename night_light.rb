@@ -57,7 +57,7 @@ class MotionSensor
   end
 
   def on
-    motion = GPIO::MotionDetector.new(pin: 18)
+    motion = GPIO::MotionDetector.new(pin: 24)
     loop do
       motion_detected if motion.detect && !@sleeping
     end
